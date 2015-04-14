@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PhoneRemoter</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="start">启动</string>
+    <string name="stop">停止</string>
+    <string name="status">服务状态：</string>
+    <string name="status_running">正在运行</string>
+    <string name="status_stop">停止</string>
+
+    <string name="remote_ip">远程控制IP（以分号;隔开）：</string>
+    <string name="ISRemote_address_limited">是否限制远程IP</string>
+    <string name="quit">退出</string>
+</resources>
