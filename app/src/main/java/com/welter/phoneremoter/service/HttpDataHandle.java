@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import com.welter.phoneremoter.io.FileSp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 public class HttpDataHandle extends DataHandle {
 
@@ -19,8 +20,8 @@ public class HttpDataHandle extends DataHandle {
     private String _responseCode = "200 OK";
     private String _contentType = "text/html";
 
-    public HttpDataHandle(byte[] recieveData, String sourceIP) {
-        super(recieveData,sourceIP);
+    public HttpDataHandle(byte[] recieveData, String sourceIP,Context ctx) {
+        super(recieveData,sourceIP,ctx);
         try {
 
             this._receiveInfo = new String(recieveData, _encoding);

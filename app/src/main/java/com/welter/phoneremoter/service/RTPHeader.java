@@ -1,5 +1,7 @@
 package com.welter.phoneremoter.service;
 
+import android.util.Log;
+
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -7,47 +9,79 @@ import java.io.UnsupportedEncodingException;
  */
 public class RTPHeader {
     final static String RTPHeaderStr="RTPHWELTER";
+    private MyLog _mylog=new MyLog("RTPHeader");
     private String _method="";
     private String _mousebutton="";
     private int _Xcoordinate1=0;
     private int _Ycoordinate1=0;
     private int _Xcoordinate2=0;
     private int _Ycoordinate2=0;
-    private String _key="" ;
-    public void RTPHeader(String headerStr){
+    private int _key=0 ;
+    public RTPHeader(String headerStr){
         analy(headerStr);
     }
 
     private void analy(String headerStr) {
+        _mylog.l(Log.DEBUG,"get in RTPHeader");
         if (headerStr == null || headerStr.length() <= 0) {
             return;
         }
-        int headeridx = 0 ;
+        int headeridx=-1;
         headeridx=headerStr.indexOf(RTPHeaderStr);
+        _mylog.l(Log.DEBUG,"headerStr="+headerStr);
+        _mylog.l(Log.DEBUG,"headeridx="+Integer.toString(headeridx));
+        _mylog.l(Log.DEBUG,"RTPHeader length:" +
+                RTPHeaderStr.length()+" headerStr length:"+headerStr.length());
             if (headeridx>=0) {
-                _method = headerStr.substring(headeridx + 1, headeridx + 5);
+                headerStr=headerStr.substring(headeridx+RTPHeaderStr.length(),headerStr.length());
+                _mylog.l(Log.DEBUG,"headerstr(cuted header):"+headerStr);
+                _method = headerStr.substring( 0, 4);
+                _mylog.l(Log.DEBUG,"method name:"+_method);
                 switch (_method){
                     case "KEYD":
-                        _key=headerStr.substring(headeridx+5,headeridx+6);
+                        _key=Integer.parseInt(headerStr.substring(4, 8));
                         break;
                     case "KEYU":
-                        _key=headerStr.substring(headeridx+5,headeridx+6);
+                        _key=Integer.parseInt(headerStr.substring(4, 8));
                         break;
                     case "KEY ":
-                        _key=headerStr.substring(headeridx+5,headeridx+6);
+                        _key=Integer.parseInt(headerStr.substring(4, 8));
                         break;
-                    case "MOSC":
-                        _mousebutton=headerStr.substring(headeridx + 5, headeridx + 6);
-                        _Xcoordinate1=Integer.getInteger(headerStr.substring(headeridx + 6, headeridx + 9),-1);
-                        _Ycoordinate1=Integer.getInteger(headerStr.substring(headeridx + 9, headeridx + 12),-1);
+                    case "TOH ":
+                        _mylog.l(Log.DEBUG,"get TOH command:"+headerStr.substring(5, 9)+","+headerStr.substring(9, 13));
+                        _mousebutton=headerStr.substring(4, 5);
+                        _Xcoordinate1 = Integer.parseInt(headerStr.substring(5, 9));
+                        _Ycoordinate1=Integer.parseInt(headerStr.substring(9, 13));
+                        _mylog.l(Log.DEBUG,"analy TOH command finished");
                         break;
-                    case "MOSD":
-                        _mousebutton=headerStr.substring(headeridx + 5, headeridx + 6);
-                        _Xcoordinate1=Integer.getInteger(headerStr.substring(headeridx + 6, headeridx + 9),-1);
-                        _Ycoordinate1=Integer.getInteger(headerStr.substring(headeridx + 9, headeridx + 12),-1);
-                        _Xcoordinate2=Integer.getInteger(headerStr.substring(headeridx + 12, headeridx + 15),-1);
-                        _Ycoordinate2=Integer.getInteger(headerStr.substring(headeridx + 15, headeridx + 18),-1);
-                };
+                    case "TOHD":
+                        _mousebutton=headerStr.substring(4, 5);
+                        _Xcoordinate1=Integer.parseInt(headerStr.substring(5, 9));
+                        _Ycoordinate1=Integer.parseInt(headerStr.substring(9, 13));
+                        break;
+                    case "TOHU":
+                        _mousebutton=headerStr.substring(4, 5);
+                        _Xcoordinate1=Integer.parseInt(headerStr.substring(5, 9));
+                        _Ycoordinate1=Integer.parseInt(headerStr.substring(9, 13));
+                        break;
+                    case "TOHS":
+                        _mousebutton=headerStr.substring(4, 5);
+                        _Xcoordinate1=Integer.parseInt(headerStr.substring(5, 9), -1);
+                        _Ycoordinate1=Integer.parseInt(headerStr.substring(9, 13), -1);
+                        _Xcoordinate2=Integer.parseInt(headerStr.substring(13, 17), -1);
+                        _Ycoordinate2=Integer.parseInt(headerStr.substring(17, 21),-1);
+                        break;
+                    case "HOME":
+                        _mylog.l(Log.WARN,"analy home command");
+                    case "BACK":
+                    case "MENU":
+                    case "SCRN":
+                    case "VOLU":
+                    case "VOLD":
+                        break;
+                    default:
+                        _method="UNKNOWN";
+                }
 
             };
     }
@@ -68,7 +102,7 @@ public class RTPHeader {
         return _Ycoordinate2;
     }
 
-    public String get_key() {
+    public int get_key() {
         return _key;
     }
 

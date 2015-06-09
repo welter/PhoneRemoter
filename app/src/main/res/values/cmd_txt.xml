@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="back2">
+        <item>sendevent /dev/input/event0 0003 0057 00000409</item>
+        <item>sendevent /dev/input/event0 0003 0053 000000151</item>
+        <item>sendevent /dev/input/event0 0003 0054 000001359</item>
+        <item>sendevent /dev/input/event0 0003 0058 00000033</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001358</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001357</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0054 000001356</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0057 4294967295</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+
+    </string-array>
+    <string-array name="back">
+        <item>input keyevent 4</item>
+    </string-array>
+    <string-array name="home">
+        <item>input keyevent 3</item>
+        </string-array>
+    <string-array name="home2">
+        <item>sendevent /dev/input/event0 0003 0057 00025061</item>
+        <item>sendevent /dev/input/event0 0003 0053 00000365</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001359</item>
+        <item>sendevent /dev/input/event0 0003 0058 00000036</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001358</item>
+        <item>sendevent /dev/input/event0 0003 0058 00000037</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001357</item>
+        <item>sendevent /dev/input/event0 0003 0058 00000038</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001356</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001355</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0057 4294967295</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+    </string-array>
+    <string-array name="menu2">
+        <item>sendevent /dev/input/event0 0003 0057 00000413</item>
+        <item>sendevent /dev/input/event0 0003 0053 00000593</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001354</item>
+        <item>sendevent /dev/input/event0 0003 0058 00000040</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0054 00001353</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0053 00000592</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0053 00000591</item>
+        <item>sendevent /dev/input/event0 0003 0058 00000039</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0057 4294967295</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+    </string-array>
+    <string-array name="menu">
+        <item>input keyevent 82</item>
+    </string-array>
+    <string-array name="touch2">
+        <item>sendevent /dev/input/event0 0003 0057 00000419</item>
+        <item>sendevent /dev/input/event0 0003 0053 %x</item>
+        <item>sendevent /dev/input/event0 0003 0054 %y</item>
+        <item>sendevent /dev/input/event0 0003 0058 %p</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+        <item>sendevent /dev/input/event0 0003 0057 4294967295</item>
+        <item>sendevent /dev/input/event0 0000 0000 00000000</item>
+
+    </string-array>
+    <string-array name="touch">
+        <item>input tap %x %y</item>
+    </string-array>
+    <string-array name="key">
+        <item>input keyevent %k</item>
+    </string-array>
+    <string-array name="volup">
+        <item>input keyevent 24</item>
+    </string-array>
+    <string-array name="voldown">
+        <item>input keyevent 25</item>
+    </string-array>
+</resources>

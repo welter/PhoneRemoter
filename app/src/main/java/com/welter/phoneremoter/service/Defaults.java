@@ -31,7 +31,7 @@ public class Defaults {
     private static String _root = Environment.getExternalStorageDirectory()
             .getAbsolutePath();
     private static String _indexPage = "index.html";
-    private static int _port = 8080;
+    private static int _port = 9500;
     private static String _settingsName = "WebService";
     @SuppressWarnings("deprecation")
     private static int _settingsMode = Context.MODE_WORLD_WRITEABLE;

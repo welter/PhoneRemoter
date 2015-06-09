@@ -8,6 +8,7 @@ public class HttpHeader {
     private String _url = "";
     private String _fileName = "";
     private String _contentType = "text/html";
+    //private MyLog _mylog=new("http")
 
     public String getMethod() {
         return _method;
