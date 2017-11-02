@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Service;
 import android.content.Context;
@@ -30,6 +32,7 @@ public class RemoterService extends Service implements Runnable {
     private static boolean _isRunning = false;
     private static Thread _serverThread = null;
     private ServerSocket _listenSocket = null;
+    private Timer _timer=null;
     private MyLog _myLog = new MyLog(getClass().getName());
     private static int _port = Defaults.getPort();
     private TcpListener _tcpListener = null;
@@ -47,6 +50,14 @@ public class RemoterService extends Service implements Runnable {
         _listenSocket = new ServerSocket();
         _listenSocket.setReuseAddress(true);
         _listenSocket.bind(new InetSocketAddress(_port));
+        _timer=new Timer();
+        TimerTask _timertask=new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        };
+        _timer.schedule(_timertask ,100);
     }
 
     public static void Start(Context context) {

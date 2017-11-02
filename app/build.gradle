@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.welter.phoneremoter"
@@ -20,7 +20,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile files('libs/ddmlib.jar')
+    //compile files('lib/ddmlib-26.0.0.jar')
+    compile files('src/main/libs/ddmlib-26.0.0-dev.jar')
+    compile files('src/main/libs/ddmuilib-26.0.0-dev.jar')
+    compile files('src/main/libs/guava-22.0.jar')
 }

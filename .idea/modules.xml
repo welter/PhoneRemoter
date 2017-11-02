@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PhoneRemoter.iml" filepath="$PROJECT_DIR$/PhoneRemoter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libshot/libshot.iml" filepath="$PROJECT_DIR$/libshot/libshot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tcptools/tcptools.iml" filepath="$PROJECT_DIR$/tcptools/tcptools.iml" />
     </modules>
   </component>
 </project>
