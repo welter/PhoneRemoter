@@ -26,6 +26,7 @@ import android.util.Log;
 //import java.net.InetAddress;
 //import java.net.InetSocketAddress;
 //import java.net.ServerSocket;
+import com.androidyuan.lib.screenshot.Shotter;
 import com.welter.phoneremoter.kits.IP;
 
 public class RemoterService extends Service implements Runnable {
@@ -37,6 +38,8 @@ public class RemoterService extends Service implements Runnable {
     private static int _port = Defaults.getPort();
     private TcpListener _tcpListener = null;
     private static final int WAKE_INTERVAL_MS = 1000;
+    private static Intent ResultIntent;
+    private ScreenCapturer _screenCapturer;
 
     public RemoterService() {
         try {
@@ -93,7 +96,7 @@ public class RemoterService extends Service implements Runnable {
             _myLog.l(Log.WARN, "Won't start, server thread exists");
             if (attempts <= 0) {
                 _myLog.l(Log.ERROR, "Server thread already exists");
-                return super.onStartCommand(intent, flags, startId);
+                //return super.onStartCommand(intent, flags, startId);
             }
 
             try {
@@ -105,8 +108,10 @@ public class RemoterService extends Service implements Runnable {
             attempts--;
         }
         _myLog.l(Log.DEBUG, "Creating server thread");
+        if (ResultIntent==null & intent!=null ) ResultIntent= (Intent) intent.getParcelableExtra("ResultIntent");
         _serverThread = new Thread(this);
         _serverThread.start();
+
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -116,7 +121,9 @@ public class RemoterService extends Service implements Runnable {
         if (_tcpListener != null) {
             _tcpListener.quit();
         }
-
+        if (_screenCapturer!=null){
+            //shotter;
+        }
         _myLog.l(Log.INFO, "onDestroy() Stopping server");
         if (_serverThread == null) {
             _myLog.l(Log.WARN, "Stopping with null serverThread");
@@ -172,6 +179,8 @@ public class RemoterService extends Service implements Runnable {
             } catch (InterruptedException e) {
                 _myLog.l(Log.DEBUG, "Thread interrupted");
             }
+
+            if (_screenCapturer==null) _screenCapturer=new ScreenCapturer(ResultIntent,this);
         }
     }
 

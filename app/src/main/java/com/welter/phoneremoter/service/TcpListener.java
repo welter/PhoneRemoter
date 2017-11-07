@@ -6,6 +6,7 @@ package com.welter.phoneremoter.service;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import android.app.Service;
 import android.content.Context;
 import android.util.Log;
 public class TcpListener extends Thread {
@@ -13,9 +14,9 @@ public class TcpListener extends Thread {
     private MyLog _myLog = new MyLog(getClass().getName());
     private Context _ctx;
 
-    public TcpListener(ServerSocket listenSocket, RemoterService RemoterService) {
+    public TcpListener(ServerSocket listenSocket, Service service) {
         this._listenSocket = listenSocket;
-        _ctx=RemoterService.getBaseContext();
+        _ctx=service.getBaseContext();
     }
 
     public void quit() {
