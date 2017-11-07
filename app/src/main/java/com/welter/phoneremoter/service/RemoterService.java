@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
+import android.os.Parcelable;
 import android.util.Log;
 
 
@@ -63,11 +64,12 @@ public class RemoterService extends Service implements Runnable {
         _timer.schedule(_timertask ,100);
     }
 
-    public static void Start(Context context) {
+    public static void Start(Context context,Parcelable data) {
 
         if (!_isRunning) {
             _isRunning = true;
-            Intent intent = new Intent(context, RemoterService.class);
+            Intent intent=new Intent(context, RemoterService.class);
+            intent.putExtra("ResultIntent", data);
             context.startService(intent);
         }
 
@@ -180,7 +182,11 @@ public class RemoterService extends Service implements Runnable {
                 _myLog.l(Log.DEBUG, "Thread interrupted");
             }
 
-            if (_screenCapturer==null) _screenCapturer=new ScreenCapturer(ResultIntent,this);
+            if (_screenCapturer==null)
+            {
+                _screenCapturer=new ScreenCapturer(ResultIntent,this);
+                _screenCapturer.start();
+            }
         }
     }
 

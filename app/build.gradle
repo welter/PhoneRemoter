@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 23
     buildToolsVersion '25.0.0'
 
     defaultConfig {
@@ -21,9 +21,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:25.0.1'
     //compile files('lib/ddmlib-26.0.0.jar')
-    compile files('src/main/libs/ddmlib-26.0.0-dev.jar')
-    compile files('src/main/libs/ddmuilib-26.0.0-dev.jar')
-    compile files('src/main/libs/guava-22.0.jar')
+//    compile files('src/main/libs/ddmlib-26.0.0-dev.jar')
+//    compile files('src/main/libs/ddmuilib-26.0.0-dev.jar')
+//    compile files('src/main/libs/guava-22.0.jar')
+    compile project(path: ':libshot')
 }

@@ -80,7 +80,7 @@ public class ScreenShotActivity extends Activity {
                     },Shotter.ResultType.RTNet);*/
                     Intent intent=new Intent(this, ScreenShotService.class);
                     intent.putExtra("ResultIntent", data);
-                    startService(intent);
+//                    startService(intent);
 
                     finish(); // don't forget finish activity
                 }

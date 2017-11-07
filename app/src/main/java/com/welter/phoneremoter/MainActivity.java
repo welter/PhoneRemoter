@@ -1,10 +1,14 @@
 package com.welter.phoneremoter;
 
 import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.projection.MediaProjectionManager;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.welter.phoneremoter.service.MyLog;
 import com.welter.phoneremoter.service.RemoterService;
 
 import java.util.List;
@@ -22,6 +27,7 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
     final static String RServiceName="com.welter.phoneremoter.service.RemoterService";
+    public static final int REQUEST_MEDIA_PROJECTION = 0x2893;
     boolean GetServiceStatus(String ServiceName ){
         int tag=0;
         ActivityManager manager=(ActivityManager)getSystemService(ACTIVITY_SERVICE);
@@ -44,9 +50,19 @@ public class MainActivity extends ActionBarActivity {
                 TextView T_ServiceStatus = (TextView) findViewById(R.id.textView);
                 T_ServiceStatus.setTextColor(Color.GREEN);
                 T_ServiceStatus.setText(getText(R.string.status_running));
+                if (Build.VERSION.SDK_INT >= 21) {
+                    startActivityForResult(
+                            ((MediaProjectionManager) getSystemService("media_projection")).createScreenCaptureIntent(),
+                            REQUEST_MEDIA_PROJECTION
+                    );
+                }
+                else
+                {
+                    Log.i(this.getClass().getName(),"版本过低,无法截屏");
+                }
 //                Toast.makeText(this.getContext(),"",5);
 //                startService(new Intent(MainActivity.this, RemoterService.class));
-                RemoterService.Start(MainActivity.this.getApplicationContext());
+//                RemoterService.Start(MainActivity.this.getApplicationContext());
             }
         }
     };
@@ -79,6 +95,30 @@ public class MainActivity extends ActionBarActivity {
 
         }
     };
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_MEDIA_PROJECTION: {
+                if (resultCode == -1 && data != null) {
+                    /*Shotter shotter=new Shotter(ScreenShotActivity.this,data);
+                    shotter.startScreenShot(new Shotter.OnShotListener() {
+                        @Override
+                        public void onFinish() {
+                            toast("shot finish!");
+
+                        }
+                    },Shotter.ResultType.RTNet);*/
+//                    Intent intent=new Intent(this, RemoterService.class);
+//                    intent.putExtra("ResultIntent", data);
+//                    startService(intent);
+                    RemoterService.Start(MainActivity.this.getApplicationContext(),data);
+//                    startService(intent);
+
+//                    finish(); // don't forget finish activity
+                }
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
