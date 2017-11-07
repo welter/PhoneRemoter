@@ -8,6 +8,7 @@ package com.welter.phoneremoter.service;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.util.Log;
 
 import com.androidyuan.lib.screenshot.Shotter;
@@ -34,6 +35,7 @@ public class ScreenCapturer extends Thread {
     public void run() {
         try {
             while (true) {
+                Looper.prepare();
                 _shotter.startScreenShot(new Shotter.OnShotListener() {
                     @Override
                     public void onFinish() {
@@ -41,7 +43,8 @@ public class ScreenCapturer extends Thread {
 
                     }
                 },Shotter.ResultType.RTNet);
-                this.join(300);
+                this.sleep(300);
+                Looper.loop();
                 //postDelayed(this, 300);
             }
         } catch (Exception e) {
