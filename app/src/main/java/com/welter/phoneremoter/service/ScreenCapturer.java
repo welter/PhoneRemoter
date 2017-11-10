@@ -33,9 +33,11 @@ public class ScreenCapturer extends Thread {
     }
 
     public void run() {
+        Looper.prepare();
+
         try {
             while (true) {
-                Looper.prepare();
+
                 _shotter.startScreenShot(new Shotter.OnShotListener() {
                     @Override
                     public void onFinish() {
@@ -44,11 +46,12 @@ public class ScreenCapturer extends Thread {
                     }
                 },Shotter.ResultType.RTNet);
                 this.sleep(300);
-                Looper.loop();
+
                 //postDelayed(this, 300);
             }
         } catch (Exception e) {
             _myLog.l(Log.DEBUG, e.getLocalizedMessage()+"Exception in Scapturer");
         }
+        Looper.loop();
     }
 }

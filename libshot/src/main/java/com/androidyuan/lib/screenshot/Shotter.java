@@ -100,11 +100,11 @@ public class Shotter {
 
 //            virtualDisplay();
 
-            Handler handler = new Handler();
+//            Handler handler = new Handler();
 
-            handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
+//            handler.postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
 
                                         Image image = mImageReader.acquireLatestImage();
 
@@ -116,9 +116,9 @@ public class Shotter {
                                         {
                                             AsyncTaskCompat.executeParallel(new SendByNetworkTask(), image);
                                         }
-                                    }
-                                },
-                    300);
+//                                    }
+         //                       },
+//                    300);
 
         }
 
