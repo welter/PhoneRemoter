@@ -57,7 +57,7 @@ public class Shotter {
     public Shotter(Context context, Intent data) {
         this.mRefContext = context;//SoftReference<>(context);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && mMediaProjection==null) {
 
 
             mMediaProjection = getMediaProjectionManager().getMediaProjection(Activity.RESULT_OK,
@@ -321,6 +321,16 @@ public class Shotter {
         return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
 
+
+    public  void close() {
+        //super.finalize();
+        if (mVirtualDisplay != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                mVirtualDisplay.release();
+            }
+        }
+
+    }
 
     // a  call back listener
     public interface OnShotListener {

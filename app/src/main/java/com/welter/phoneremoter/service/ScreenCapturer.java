@@ -26,7 +26,9 @@ public class ScreenCapturer extends Thread {
     }
 
     public void quit() {
+        int i=1;
         try {
+            _shotter.close();
         } catch (Exception e) {
             _myLog.l(Log.DEBUG, "Exception closing shotter");
         }

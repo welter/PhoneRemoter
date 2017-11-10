@@ -40,7 +40,7 @@ public class RemoterService extends Service implements Runnable {
     private TcpListener _tcpListener = null;
     private static final int WAKE_INTERVAL_MS = 1000;
     private static Intent ResultIntent;
-    private ScreenCapturer _screenCapturer;
+    private static ScreenCapturer _screenCapturer;
 
     public RemoterService() {
         try {
@@ -79,6 +79,7 @@ public class RemoterService extends Service implements Runnable {
 
         if (_isRunning) {
             _isRunning = false;
+            _screenCapturer.quit();
             Intent intent = new Intent(context, RemoterService.class);
             context.stopService(intent);
         }
